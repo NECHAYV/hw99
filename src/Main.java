@@ -1,114 +1,50 @@
-import java.util.Objects;
-
-class Author {
-    private String firstName;
-    private String lastName;
-
-    public Author(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    @Override
-    public String toString() {
-        return firstName + " " + lastName;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Author author = (Author) o;
-        return Objects.equals(firstName, author.firstName) &&
-                Objects.equals(lastName, author.lastName);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(firstName, lastName);
-    }
-}
-
-class Book {
-    private String title;
-    private Author author;
-    private int publicationYear;
-
-    public Book(String title, Author author, int publicationYear) {
-        this.title = title;
-        this.author = author;
-        this.publicationYear = publicationYear;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public Author getAuthor() {
-        return author;
-    }
-
-    public int getPublicationYear() {
-        return publicationYear;
-    }
-
-    public void setPublicationYear(int publicationYear) {
-        this.publicationYear = publicationYear;
-    }
-
-    @Override
-    public String toString() {
-        return "'" + title + "' by " + author.toString() + ", published in " + publicationYear;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Book book = (Book) o;
-        return publicationYear == book.publicationYear &&
-                Objects.equals(title, book.title) &&
-                Objects.equals(author, book.author);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(title, author, publicationYear);
-    }
-}
-
-public class Main {
+class AccountingTasks {
     public static void main(String[] args) {
-        Author tolkien = new Author("J.R.R.", "Tolkien");
-        Author rowling = new Author("J.K.", "Rowling");
+        int[] monthlyExpenses = {15000, 23000, 18000, 21000, 19000};
+        int totalExpenses = 0;
+        System.out.println("Сумма трат за месяц составила " + totalExpenses + " рублей");
 
-        Book lotr = new Book("The Lord of the Rings", tolkien, 1954);
-        Book hp = new Book("Harry Potter and the Philosopher's Stone", rowling, 1997);
-        Book hpCopy = new Book("Harry Potter and the Philosopher's Stone", rowling, 1997);
+        for (int expense : monthlyExpenses) {
+            totalExpenses += expense;
+        }
 
-        System.out.println("Authors:");
-        System.out.println(tolkien);
-        System.out.println(rowling);
+        System.out.println("Сумма трат за месяц составила " + totalExpenses + " рублей");
 
-        System.out.println("\nBooks:");
-        System.out.println(lotr);
-        System.out.println(hp);
+        int[] weeklyExpenses = {42000, 38000, 45000, 41000, 39000};
+        int minExpense = weeklyExpenses[0];
+        int maxExpense = weeklyExpenses[0];
+        for (int i = 1; i < weeklyExpenses.length; i++) {
+            if (weeklyExpenses[i] < minExpense) {
+                minExpense = weeklyExpenses[i];
+            }
+            if (weeklyExpenses[i] > maxExpense) {
+                maxExpense = weeklyExpenses[i];
+            }
+        }
+        System.out.println("Минимальная сумма трат за неделю составила " + minExpense +
+                " рублей. Максимальная сумма трат за неделю составила " +
+                maxExpense + " рублей");
 
-        System.out.println("\nTesting equality:");
-        System.out.println("hp.equals(hpCopy): " + hp.equals(hpCopy));
-        System.out.println("hp.equals(lotr): " + hp.equals(lotr));
+        int[] monthExpenses = {175000, 182000, 169000, 188000, 174000};
+        double totalMonthExpenses = 0;
 
-        System.out.println("\nHash codes:");
-        System.out.println("hp.hashCode(): " + hp.hashCode());
-        System.out.println("hpCopy.hashCode(): " + hpCopy.hashCode());
-        System.out.println("lotr.hashCode(): " + lotr.hashCode());
+        for (int expense : monthExpenses) {
+            totalMonthExpenses += expense;
+        }
+        double averageExpenses = totalMonthExpenses / monthExpenses.length;
+        System.out.println("Средняя сумма трат за месяц составила " + averageExpenses + " рублей");
+
+        char[] reverseFullName = {'n', 'a', 'v', 'I', ' ', 'v', 'o', 'n', 'a', 'v', 'I'};
+
+        for (int i = 0; i < reverseFullName.length / 2; i++) {
+            char temp = reverseFullName[i];
+            reverseFullName[i] = reverseFullName[reverseFullName.length - 1 - i];
+            reverseFullName[reverseFullName.length - 1 - i] = temp;
+        }
+        System.out.print("Исправленное имя: ");
+        for (char c : reverseFullName) {
+            System.out.print(c);
+        }
+        System.out.println();
     }
 }
