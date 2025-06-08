@@ -1,83 +1,82 @@
-import java.time.LocalDate;
+class Author {
+    private String firstName;
+    private String lastName;
+
+
+    public Author(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+
+    public String getLastName() {
+        return lastName;
+    }
+
+
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+}
+
+
+class Book {
+    private String title;      // Название книги
+    private Author author;    // Автор книги
+    private int publicationYear;  // Год публикации
+
+
+    public Book(String title, Author author, int publicationYear) {
+        this.title = title;
+        this.author = author;
+        this.publicationYear = publicationYear;
+    }
+
+
+    public String getTitle() {
+        return title;
+    }
+
+
+    public Author getAuthor() {
+        return author;
+    }
+
+
+    public int getPublicationYear() {
+        return publicationYear;
+    }
+
+
+    public void setPublicationYear(int publicationYear) {
+        this.publicationYear = publicationYear;
+    }
+
+
+    public String getBookInfo() {
+        return "'" + title + "' by " + author.getFullName() + ", published in " + publicationYear;
+    }
+}
 
 public class Main {
-
     public static void main(String[] args) {
-        demonstrateLeapYearCheck();
-        demonstrateAppVersionSuggestion();
-        demonstrateDeliveryDaysCalculation();
-    }
+        // Создаем авторов
+        Author tolkien = new Author("J.R.R.", "Tolkien");
+        Author rowling = new Author("J.K.", "Rowling");
 
+        Book lotr = new Book("The Lord of the Rings", tolkien, 1954);
+        Book hp = new Book("Harry Potter and the Philosopher's Stone", rowling, 1997);
 
-    public static void demonstrateLeapYearCheck() {
-        System.out.println("=== Проверка високосных годов ===");
-        checkLeapYear(2020);
-        checkLeapYear(2021);
-        checkLeapYear(2000);
-        checkLeapYear(1900);
-        System.out.println();
-    }
+        System.out.println(lotr.getBookInfo());
+        System.out.println(hp.getBookInfo());
 
-    public static void checkLeapYear(int year) {
-        if (isLeapYear(year)) {
-            System.out.println(year + " год — високосный год");
-        } else {
-            System.out.println(year + " год — невисокосный год");
-        }
-    }
-
-    public static boolean isLeapYear(int year) {
-        return (year % 400 == 0) || (year % 100 != 0 && year % 4 == 0);
-    }
-
-    public static void demonstrateAppVersionSuggestion() {
-        System.out.println("=== Рекомендации по версии приложения ===");
-        suggestAppVersion(0, 2014); // iOS, старый телефон
-        suggestAppVersion(1, 2023); // Android, новый телефон
-        suggestAppVersion(0, LocalDate.now().getYear()); // iOS, текущий год
-        System.out.println();
-    }
-
-    public static void suggestAppVersion(int osType, int clientDeviceYear) {
-        String osName = getOsName(osType);
-        String version = getAppVersion(clientDeviceYear);
-
-        System.out.println("Установите " + version + " версию приложения для " + osName + " по ссылке");
-    }
-    public static String getOsName(int osType) {
-        return osType == 0 ? "iOS" : "Android";
-    }
-
-    public static String getAppVersion(int clientDeviceYear) {
-        return clientDeviceYear < LocalDate.now().getYear() ? "облегченную" : "обычную";
-    }
-
-    public static void demonstrateDeliveryDaysCalculation() {
-        System.out.println("=== Расчет дней доставки ===");
-        printDeliveryDays(15);
-        printDeliveryDays(35);
-        printDeliveryDays(75);
-        printDeliveryDays(105);
-    }
-
-    public static void printDeliveryDays(int deliveryDistance) {
-        int days = calculateDeliveryDays(deliveryDistance);
-        if (days > 0) {
-            System.out.println("Потребуется дней: " + days);
-        } else {
-            System.out.println("Доставка на расстояние " + deliveryDistance + " км невозможна");
-        }
-    }
-
-    public static int calculateDeliveryDays(int deliveryDistance) {
-        if (deliveryDistance <= 20) {
-            return 1;
-        } else if (deliveryDistance <= 60) {
-            return 2;
-        } else if (deliveryDistance <= 100) {
-            return 3;
-        } else {
-            return -1;
-        }
+        hp.setPublicationYear(1998);
+        System.out.println("\nAfter changing publication year:");
+        System.out.println(hp.getBookInfo());
     }
 }
