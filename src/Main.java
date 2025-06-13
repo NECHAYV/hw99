@@ -1,71 +1,82 @@
 public class Main {
     public static void main(String[] args) {
+        System.out.println("=== Задание 5 ===");
+        int value5 = 33;
+        changeValue(value5);
+        System.out.println("Значение после changeValue: " + value5); // 33
 
-        EmployeeBook employeeBook = new EmployeeBook(10);
+        System.out.println("\n=== Задание 6 ===");
+        Integer value6 = 33;
+        changeValue(value6);
+        System.out.println("Значение после changeValue: " + value6); // 33
 
-        employeeBook.addEmployee("Иванов Иван Иванович", 1, 50000);
-        employeeBook.addEmployee("Петров Петр Петрович", 2, 60000);
-        employeeBook.addEmployee("Сидорова Анна Владимировна", 1, 55000);
-        employeeBook.addEmployee("Кузнецов Дмитрий Сергеевич", 3, 75000);
-        employeeBook.addEmployee("Смирнова Ольга Николаевна", 2, 45000);
+        System.out.println("\n=== Задание 7 ===");
+        Integer[] value7 = {3, 4};
+        changeValue(value7);
+        System.out.print("Массив после changeValue: ");
+        for (Integer num : value7) {
+            System.out.print(num + " "); // 3 4
+        }
+        System.out.println();
+
+        System.out.println("\n=== Задание 8 ===");
+        Integer[] value8 = {3, 4};
+        changeValueElement(value8);
+        System.out.print("Массив после changeValueElement: ");
+        for (Integer num : value8) {
+            System.out.print(num + " "); // 99 4
+        }
+        System.out.println();
+
+        System.out.println("\n=== Задание 9 ===");
+        Person person9 = new Person("Lyapis", "Trubetskoy");
+        changePerson(person9);
+        System.out.println("Person после changePerson: " + person9); // Lyapis Trubetskoy
+
+        System.out.println("\n=== Задание 10 ===");
+        Person person10 = new Person("Lyapis", "Trubetskoy");
+        changePersonFields(person10);
+        System.out.println("Person после changePersonFields: " + person10); // Ilya Lagutenko
+    }
 
 
-        System.out.println("Все сотрудники:");
-        employeeBook.printAllEmployees();
+    public static void changeValue(int value) {
+        value = 22;
+    }
 
-        System.out.println("\nОбщие затраты на зарплаты: " + employeeBook.calculateTotalSalary());
+    public static void changeValue(Integer value) {
+        value = 22;
+    }
 
-        System.out.println("\nСотрудник с минимальной зарплатой: " + employeeBook.findEmployeeWithMinSalary());
-        System.out.println("Сотрудник с максимальной зарплатой: " + employeeBook.findEmployeeWithMaxSalary());
+    public static void changeValue(Integer[] value) {
+        value = new Integer[]{1, 2};
+    }
 
-        System.out.println("\nСредняя зарплата: " + employeeBook.calculateAverageSalary());
+    public static void changeValueElement(Integer[] value) {
+        value[0] = 99;
+    }
 
-        System.out.println("\nФИО всех сотрудников:");
-        employeeBook.printFullNames();
+    public static void changePerson(Person person) {
+        person = new Person("Ilya", "Lagutenko");
+    }
 
+    public static void changePersonFields(Person person) {
+        person.name = "Ilya";
+        person.surname = "Lagutenko";
+    }
 
-        System.out.println("\nИндексация зарплат на 10%:");
-        employeeBook.indexSalaries(10);
-        employeeBook.printAllEmployees();
+    static class Person {
+        String name;
+        String surname;
 
-        System.out.println("\nСотрудник с минимальной зарплатой в отделе 1: " +
-                employeeBook.findEmployeeWithMinSalaryInDepartment(1));
+        public Person(String name, String surname) {
+            this.name = name;
+            this.surname = surname;
+        }
 
-        System.out.println("Сотрудник с максимальной зарплатой в отделе 2: " +
-                employeeBook.findEmployeeWithMaxSalaryInDepartment(2));
-
-        System.out.println("\nСумма затрат на зарплаты по отделу 1: " +
-                employeeBook.calculateTotalSalaryForDepartment(1));
-
-        System.out.println("Средняя зарплата по отделу 2: " +
-                employeeBook.calculateAverageSalaryForDepartment(2));
-
-        System.out.println("\nИндексация зарплат в отделе 3 на 5%:");
-        employeeBook.indexSalariesForDepartment(3, 5);
-        employeeBook.printAllEmployees();
-
-        System.out.println("\nСотрудники отдела 2:");
-        employeeBook.printEmployeesFromDepartment(2);
-
-        System.out.println("\nСотрудники с зарплатой меньше 60000:");
-        employeeBook.printEmployeesWithSalaryLessThan(60000);
-
-        System.out.println("\nСотрудники с зарплатой больше или равной 60000:");
-        employeeBook.printEmployeesWithSalaryGreaterOrEqualThan(60000);
-
-        // Тестируем методы управления массивом
-        System.out.println("\nДобавляем нового сотрудника:");
-        boolean added = employeeBook.addEmployee("Новиков Алексей Дмитриевич", 4, 80000);
-        System.out.println("Добавлен: " + added);
-        employeeBook.printAllEmployees();
-
-        System.out.println("\nУдаляем сотрудника с ID=2:");
-        boolean removed = employeeBook.removeEmployee(2);
-        System.out.println("Удален: " + removed);
-        employeeBook.printAllEmployees();
-
-        System.out.println("\nПолучаем сотрудника с ID=3:");
-        Employee employee = employeeBook.getEmployeeById(3);
-        System.out.println(employee);
+        @Override
+        public String toString() {
+            return name + " " + surname;
+        }
     }
 }
